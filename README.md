@@ -7,7 +7,6 @@ Inspiration: http://youtu.be/UJR1BYjtI7c?t=1m46s
 Wikipedia scraping: https://github.com/goldsmith/Wikipedia
 Parts of speech: http://www.nltk.org/book/ch05.html
 
------
 Ideas
 -----
 
