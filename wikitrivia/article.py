@@ -11,11 +11,12 @@ class Article:
         self.body = TextBlob(self.page.content)
 
     def is_unusual_word(self, word):
+        # Maybe measure against summary instead?
         return self.body.words.count(word) < 5
 
     def generate_trivia_sentences(self):
         trivia_sentences = []
-        for sentence in self.summary.sentences:
+        for sentence in self.body.sentences:
             trivia = self.evaluate_sentence(sentence)
             if trivia:
                 trivia_sentences.append(str(trivia))
@@ -23,23 +24,23 @@ class Article:
         return trivia_sentences
 
     def evaluate_sentence(self, sentence):
+        tag_map = {word: tag for word, tag in sentence.tags}
+
         replace_nouns = []
-        for counter, tag in enumerate(sentence.tags):
-            if tag[1] == 'NN':
-                noun = tag[0]
-                
+        for word, tag in sentence.tags:
+            if tag == 'NN':
                 # Is it unusual compared to other words in this article? 
                 # If not, it probably won't make for good trivia
-                if not self.is_unusual_word(noun):
+                if not self.is_unusual_word(word):
                     break
                 
                 # Is it in a noun phrase? If so, blank out everything in that phrase
                 for phrase in sentence.noun_phrases:
-                    if noun in phrase:
-                        [replace_nouns.append(word) for word in phrase.split()]
+                    if word in phrase:
+                        [replace_nouns.append(word) for word in phrase.split() if tag_map[word] == 'NN']
                         break
                     else:
-                        replace_nouns.append(noun)
+                        replace_nouns.append(word)
                 break
         
         if len(replace_nouns) == 0:
