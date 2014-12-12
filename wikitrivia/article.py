@@ -27,6 +27,10 @@ class Article:
         return trivia_sentences
 
     def evaluate_sentence(self, sentence):
+        if sentence.tags[0][1] == 'RB':
+            # This sentence starts with an adverb, and probably won't be a good fit
+            return None
+
         tag_map = {word.lower(): tag for word, tag in sentence.tags}
 
         replace_nouns = []
@@ -34,8 +38,8 @@ class Article:
             if tag == 'NN':
                 # Is it unusual compared to other words in this article? 
                 # If not, it probably won't make for good trivia
-                if not self.is_unusual_word(word):
-                    break
+                # if not self.is_unusual_word(word):
+                #     break
                 
                 # Is it in a noun phrase? If so, blank out everything in that phrase
                 for phrase in sentence.noun_phrases:
@@ -44,10 +48,11 @@ class Article:
                         break
 
                     if word in phrase:
-                        [replace_nouns.append(word) for word in phrase.split()]
-                        break
+                        # import pdb; pdb.set_trace()
+                        [replace_nouns.append(phrase_word) for phrase_word in phrase.split()]
                     else:
                         replace_nouns.append(word)
+                    break
                 break
         
         if len(replace_nouns) == 0:
@@ -55,6 +60,9 @@ class Article:
             # to make good trivia
             return None
 
+        trivia = {'answers': replace_nouns}
+
         for word in replace_nouns:
             sentence = sentence.replace(word, '__________')
-        return sentence
+        trivia['question'] = sentence
+        return trivia
