@@ -22,7 +22,7 @@ class Article:
         for sentence in sentences:
             trivia = self.evaluate_sentence(sentence)
             if trivia:
-                trivia_sentences.append(str(trivia))
+                trivia_sentences.append(trivia)
 
         return trivia_sentences
 
@@ -64,5 +64,5 @@ class Article:
 
         for word in replace_nouns:
             sentence = sentence.replace(word, '__________')
-        trivia['question'] = sentence
+        trivia['question'] = str(sentence)
         return trivia
