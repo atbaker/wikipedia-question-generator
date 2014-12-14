@@ -12,9 +12,9 @@ def generate_trivia(title, output):
     questions = article.generate_trivia_sentences()
 
     if output:
-      with open('foo.json', 'w') as json_file:
+      with open(output, 'w') as json_file:
         json.dump(questions, json_file)
-        click.echo('Output stored in foo.json')
+        click.echo('Output stored in {0}'.format(output))
     else:
       click.echo(questions)
 
