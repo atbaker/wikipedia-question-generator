@@ -60,7 +60,10 @@ class Article:
             # to make good trivia
             return None
 
-        trivia = {'answer': ' '.join(replace_nouns)}
+        trivia = {
+            'page_title': self.page.title,
+            'answer': ' '.join(replace_nouns)
+        }
 
         for word in replace_nouns:
             sentence = sentence.replace(word, '__________')
