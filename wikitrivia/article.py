@@ -61,7 +61,7 @@ class Article:
             return None
 
         trivia = {
-            'page_title': self.page.title,
+            'title': self.page.title,
             'answer': ' '.join(replace_nouns)
         }
 
