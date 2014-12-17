@@ -5,17 +5,16 @@ import json
 
 ARTICLES = (
     'Tony Bennett',
-    'The Room (film)',
-    'Denmark',
-    'Benedict Arnold',
-    'Communism',
+    'Python (programming language)',
+    'Henry V, Duke of Carinthia',
+    'Scabbling',
+    'Globe of the Great Southwest',
     'Ukrainian Women\'s Volleyball Super League'
 )
 
 @click.command()
-@click.argument('title')
 @click.option('--output', default=False, help='Output to JSON file')
-def generate_trivia(title, output):
+def generate_trivia(output):
     """Generates trivia questions from wikipedia articles"""
     questions = []
     for article in ARTICLES:
