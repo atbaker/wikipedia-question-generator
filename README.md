@@ -1,11 +1,13 @@
 question-generator
 ==================
 
-Uses NLP and wikipedia to try to generate Fibbage-style trivia questions
+Uses NLP and wikipedia to try to generate trivia questions. Built for [TrackMaven Monthly Challenge meetup](http://www.meetup.com/TrackMaven-Monthly-Challenge/events/218683569/) in December 2014.
 
-Inspiration: http://youtu.be/UJR1BYjtI7c?t=1m46s
-Wikipedia scraping: https://github.com/goldsmith/Wikipedia
-Parts of speech: http://www.nltk.org/book/ch05.html
+**Inspiration:** http://youtu.be/UJR1BYjtI7c?t=1m46s
+
+**Wikipedia scraping:** https://github.com/goldsmith/Wikipedia
+
+**Parts of speech:** http://www.nltk.org/book/ch05.html
 
 Ideas
 -----
