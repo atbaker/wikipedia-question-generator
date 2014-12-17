@@ -1,5 +1,7 @@
-import wikipedia
+from nltk.corpus import wordnet as wn
 from textblob import TextBlob
+
+import wikipedia
 
 class Article:
     """Retrieves and analyzes wikipedia articles"""
@@ -8,9 +10,6 @@ class Article:
         self.page = wikipedia.page(title)
         self.summary = TextBlob(self.page.summary)
         self.body = TextBlob(self.page.content)
-
-    def is_unusual_word(self, word):
-        return self.body.words.count(word) < 5
 
     def generate_trivia_sentences(self):
         sentences = self.summary.sentences
@@ -26,6 +25,29 @@ class Article:
 
         return trivia_sentences
 
+    def get_similar_words(self, word):
+        # In the absence of a better method, take the first synset
+        synset = wn.synsets(word, pos='n')[0]
+
+        # Get the hypernym for this synset (again, take the first)
+        hypernym = synset.hypernyms()[0]
+
+        # Get some hyponyms from this hypernym
+        hyponyms = hypernym.hyponyms()
+
+        # Take the name of the first lemma for the first 8 hyponyms
+        similar_words = []
+        for hyponym in hyponyms:
+            similar_word = hyponym.lemmas()[0].name().replace('_', ' ')
+            
+            if similar_word != word:
+                similar_words.append(similar_word)
+
+            if len(similar_words) == 8:
+                break
+
+        return similar_words
+
     def evaluate_sentence(self, sentence):
         if sentence.tags[0][1] == 'RB':
             # This sentence starts with an adverb, and probably won't be a good fit
@@ -35,12 +57,8 @@ class Article:
 
         replace_nouns = []
         for word, tag in sentence.tags:
+            # For now, only blank out non-proper nouns
             if tag == 'NN':
-                # Is it unusual compared to other words in this article? 
-                # If not, it probably won't make for good trivia
-                # if not self.is_unusual_word(word):
-                #     break
-                
                 # Is it in a noun phrase? If so, blank out everything in that phrase
                 for phrase in sentence.noun_phrases:
                     if phrase[0] == '\'':
@@ -48,7 +66,6 @@ class Article:
                         break
 
                     if word in phrase:
-                        # import pdb; pdb.set_trace()
                         [replace_nouns.append(phrase_word) for phrase_word in phrase.split()]
                     else:
                         replace_nouns.append(word)
@@ -56,8 +73,6 @@ class Article:
                 break
         
         if len(replace_nouns) == 0:
-            # No words or phrases are unusual enough in this sentence
-            # to make good trivia
             return None
 
         trivia = {
@@ -65,7 +80,13 @@ class Article:
             'answer': ' '.join(replace_nouns)
         }
 
+        if len(replace_nouns) == 1:
+            trivia['similar_words'] = self.get_similar_words(replace_nouns[0])
+        else:
+            trivia['similar_words'] = []
+
         for word in replace_nouns:
             sentence = sentence.replace(word, '__________')
+
         trivia['question'] = str(sentence)
         return trivia

@@ -3,13 +3,6 @@ from wikitrivia.article import Article
 import click
 import json
 
-# Tony Bennett
-# The Room
-# Denmark
-# Benedict Arnold
-# Communism
-# Ukranian Women's Volleyball Super-league
-
 ARTICLES = (
     'Tony Bennett',
     'The Room (film)',
