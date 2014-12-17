@@ -27,7 +27,12 @@ class Article:
 
     def get_similar_words(self, word):
         # In the absence of a better method, take the first synset
-        synset = wn.synsets(word, pos='n')[0]
+        synsets = wn.synsets(word, pos='n')
+
+        if len(synsets) == 0:
+            return []
+        else:
+            synset = synsets[0]
 
         # Get the hypernym for this synset (again, take the first)
         hypernym = synset.hypernyms()[0]
