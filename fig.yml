@@ -1,0 +1,6 @@
+# fig.yml for wikipedia-question-generator
+
+wikitrivia:
+  build: .
+  volumes:
+    - .:/usr/src/app
