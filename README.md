@@ -146,4 +146,4 @@ My approach is to find the hypernym of the answer, and then select other hyponym
 
 In the example in the "Sample usage" section, the correct answer is **painter**. The hypernym of painter is **artist**. The hyponyms I found for **artist** appear in the `similar_words` array in the output: "classic", "classicist", "constructivist", "decorator", "draftsman", "etcher", "expressionist", "illustrator".
 
-Clearly there's still much room for improvement in all respsects of the methodology, but overall I was impressed with how far I could get with an introductory understanding of [TextBlob](http://textblob.readthedocs.org/en/dev/) and [NLTK](http://www.nltk.org/).
+Clearly there's still much room for improvement in all respsects of the methodology, but overall I was impressed with how far I could get with [TextBlob](http://textblob.readthedocs.org/en/dev/), [NLTK](http://www.nltk.org/), and an introductory understanding of NLP.
