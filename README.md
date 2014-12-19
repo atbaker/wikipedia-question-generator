@@ -1,23 +1,8 @@
-question-generator
-==================
+wikipedia-question-generator
+============================
 
-Uses NLP and wikipedia to try to generate trivia questions. Built for [TrackMaven Monthly Challenge meetup](http://www.meetup.com/TrackMaven-Monthly-Challenge/events/218683569/) in December 2014.
+Uses Natural Language Processing and Wikipedia content to try to generate Mad Libs-style game questions. Powers the web app at http://wikitrivia.atbaker.me.
 
-**Inspiration:** http://youtu.be/UJR1BYjtI7c?t=1m46s
+Built for [TrackMaven Monthly Challenge meetup](http://www.meetup.com/TrackMaven-Monthly-Challenge/events/218683569/) in December 2014.
 
-**Wikipedia scraping:** https://github.com/goldsmith/Wikipedia
-
-**Parts of speech:** http://www.nltk.org/book/ch05.html
-
-Ideas
------
-
-- Scrape information from the sidebar instead
-- Strip out NN's for blanks
-- Look for NN's that don't appear elsewhere in the article?
-- Restrict initial work to living persons?
-- Find a way to identify longer sentences
-
-Classifier rules:
-    - Doesn't start with an adverb
-    -
+A short presentation about it: http://slides.com/atbaker/trackmaven-monthly-challenge-demo.
