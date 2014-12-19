@@ -3,6 +3,7 @@ from wikitrivia.article import Article
 import click
 import json
 
+# For now, hard-code the titles of articles you want to scrape here
 ARTICLES = (
     'Tony Bennett',
     'Python (programming language)',

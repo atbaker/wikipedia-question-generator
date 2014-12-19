@@ -78,6 +78,7 @@ class Article:
                 break
         
         if len(replace_nouns) == 0:
+            # Return none if we found no words to replace
             return None
 
         trivia = {
@@ -86,10 +87,13 @@ class Article:
         }
 
         if len(replace_nouns) == 1:
+            # If we're only replacing one word, use WordNet to find similar words
             trivia['similar_words'] = self.get_similar_words(replace_nouns[0])
         else:
+            # If we're replacing a phrase, don't bother - it's too unlikely to make sense
             trivia['similar_words'] = []
 
+        # Blank out our replace words
         for word in replace_nouns:
             sentence = sentence.replace(word, '__________')
 
