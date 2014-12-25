@@ -1,6 +1,7 @@
 from nltk.corpus import wordnet as wn
 from textblob import TextBlob
 
+import re
 import wikipedia
 
 class Article:
@@ -9,7 +10,6 @@ class Article:
     def __init__(self, title):
         self.page = wikipedia.page(title)
         self.summary = TextBlob(self.page.summary)
-        self.body = TextBlob(self.page.content)
 
     def generate_trivia_sentences(self):
         sentences = self.summary.sentences
@@ -54,27 +54,34 @@ class Article:
         return similar_words
 
     def evaluate_sentence(self, sentence):
-        if sentence.tags[0][1] == 'RB':
-            # This sentence starts with an adverb, and probably won't be a good fit
+        if sentence.tags[0][1] == 'RB' or len(sentence.words) < 6:
+            # This sentence starts with an adverb or is less than five words long
+            # and probably won't be a good fit
             return None
 
         tag_map = {word.lower(): tag for word, tag in sentence.tags}
 
         replace_nouns = []
         for word, tag in sentence.tags:
-            # For now, only blank out non-proper nouns
-            if tag == 'NN':
-                # Is it in a noun phrase? If so, blank out everything in that phrase
+            # For now, only blank out non-proper nouns that don't appear in the article title
+            if tag == 'NN' and word not in self.page.title:
+                # Is it in a noun phrase? If so, blank out the last two words in that phrase
                 for phrase in sentence.noun_phrases:
                     if phrase[0] == '\'':
                         # If it starts with an apostrophe, ignore it
+                        # (this is a weird error that should probably
+                        # be handled elsewhere)
                         break
 
                     if word in phrase:
-                        [replace_nouns.append(phrase_word) for phrase_word in phrase.split()]
-                    else:
-                        replace_nouns.append(word)
-                    break
+                        # Blank out the last two words in this phrase
+                        [replace_nouns.append(phrase_word) for phrase_word in phrase.split()[-2:]]
+                        break
+
+                # If we couldn't find the word in any phrases, replace it
+                # on its own
+                if len(replace_nouns) == 0:
+                    replace_nouns.append(word)
                 break
         
         if len(replace_nouns) == 0:
@@ -83,6 +90,7 @@ class Article:
 
         trivia = {
             'title': self.page.title,
+            'url': self.page.url,
             'answer': ' '.join(replace_nouns)
         }
 
@@ -93,9 +101,12 @@ class Article:
             # If we're replacing a phrase, don't bother - it's too unlikely to make sense
             trivia['similar_words'] = []
 
-        # Blank out our replace words
-        for word in replace_nouns:
-            sentence = sentence.replace(word, '__________')
+        # Blank out our replace words (only the first occurrence of the word in the sentence)
+        replace_phrase = ' '.join(replace_nouns)
+        blanks_phrase = ('__________ ' * len(replace_nouns)).strip()
 
-        trivia['question'] = str(sentence)
+        expression = re.compile(re.escape(replace_phrase), re.IGNORECASE)
+        sentence = expression.sub(blanks_phrase, str(sentence), count=1)
+
+        trivia['question'] = sentence
         return trivia
