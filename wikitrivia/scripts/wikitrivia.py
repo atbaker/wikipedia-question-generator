@@ -29,17 +29,17 @@ def generate_trivia(titles, output):
     # Retrieve the trivia sentences
     questions = []
     for article in titles:
-        click.echo('Scraping {0}'.format(article))
+        click.echo('Analyzing \'{0}\''.format(article))
         article = Article(title=article)
         questions = questions + article.generate_trivia_sentences()
 
     # Output to stdout or JSON
     if output:
       with open(output, 'w') as json_file:
-        json.dump(questions, json_file)
+        json.dump(questions, json_file, sort_keys=True, indent=4)
         click.echo('Output stored in {0}'.format(output))
     else:
-      click.echo(questions)
+      click.echo(json.dumps(questions, sort_keys=True, indent=4))
 
 if __name__ == '__main__':
     generate_trivia()
