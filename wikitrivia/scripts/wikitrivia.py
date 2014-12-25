@@ -6,7 +6,8 @@ import json
 # For now, hard-code the titles of articles you want to scrape here
 SAMPLE_ARTICLES = (
     'Tony Bennett',
-    'Python (programming language)',
+    'Gauls',
+    'Henry V, Duke of Carinthia',
     'Scabbling',
     'Ukrainian Women\'s Volleyball Super League'
 )
