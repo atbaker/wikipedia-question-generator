@@ -7,8 +7,8 @@ import json
 SAMPLE_ARTICLES = (
     'Tony Bennett',
     'Gauls',
-    'Henry V, Duke of Carinthia',
     'Scabbling',
+    'Henry V, Duke of Carinthia',
     'Ukrainian Women\'s Volleyball Super League'
 )
 
@@ -19,7 +19,7 @@ def generate_trivia(titles, output):
     """Generates trivia questions from wikipedia articles. If no
     titles are supplied, pulls from these sample articles:
 
-    'Tony Bennett', 'Python (programming language)', 'Scabbling',
+    'Tony Bennett', 'Gauls', 'Scabbling', 'Henry V, Duke of Carinthia',
     'Ukrainian Women\'s Volleyball Super League'
     """
     # Use the sample articles if the user didn't supply any
@@ -29,6 +29,7 @@ def generate_trivia(titles, output):
     # Retrieve the trivia sentences
     questions = []
     for article in titles:
+        click.echo('Scraping {0}'.format(article))
         article = Article(title=article)
         questions = questions + article.generate_trivia_sentences()
 
