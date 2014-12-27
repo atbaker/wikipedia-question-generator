@@ -59,8 +59,8 @@ Usage: wikitrivia [OPTIONS] [TITLES]...
   Women's Volleyball Super League'
 
 Options:
-  --output TEXT  Output to JSON file
-  --help         Show this message and exit.
+  --output FILENAME  Output to JSON file
+  --help             Show this message and exit.
 ```
 
 To make running the container less cumbersome, you can alias the `docker run` command:
