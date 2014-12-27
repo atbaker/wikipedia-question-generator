@@ -136,7 +136,7 @@ Though I tried a few different approaches when developing this tool, in the end 
 1. **Never use the first sentence of the summary.** It's usually too straightforward to make interesting trivia.
 1. **Don't use a sentence that starts with an adverb.** They usually depend too heavily on the idea of the previous sentence to make sense out of context.
 1. **Blank out the first common noun in the sentence (e.g. 'painter', 'infantryman').** Proper nouns (e.g. 'Frank Sinatra', 'The White House') usually seemed too easy to guess when given the title of the article and the other words in the sentence.
-1. **If that noun is part of a noun phrase, blank out the whole phrase**. Blanking out just one word seemed too easy if the phrase was recognizable.
+1. **If that noun is part of a noun phrase, blank out the last two words of the phrase**. Blanking out just one word seemed too easy if the phrase was recognizable.
 
 ### Creating decoy answers
 
