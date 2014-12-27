@@ -29,6 +29,7 @@ class Article:
         # In the absence of a better method, take the first synset
         synsets = wn.synsets(word, pos='n')
 
+        # If there aren't any synsets, return an empty list
         if len(synsets) == 0:
             return []
         else:
@@ -78,8 +79,8 @@ class Article:
                         [replace_nouns.append(phrase_word) for phrase_word in phrase.split()[-2:]]
                         break
 
-                # If we couldn't find the word in any phrases, replace it
-                # on its own
+                # If we couldn't find the word in any phrases,
+                # replace it on its own
                 if len(replace_nouns) == 0:
                     replace_nouns.append(word)
                 break
