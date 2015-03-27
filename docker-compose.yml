@@ -1,4 +1,4 @@
-# fig.yml for wikipedia-question-generator
+# docker-compose.yml for wikipedia-question-generator
 
 wikitrivia:
   build: .

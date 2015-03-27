@@ -1,6 +1,6 @@
 # Dockerfile for wikipedia-question-generator
 
-FROM python:3.4.2
+FROM python:3.4
 
 MAINTAINER Andrew T. Baker <andrew.tork.baker@gmail.com>
 
