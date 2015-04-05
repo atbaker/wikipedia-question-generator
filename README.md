@@ -7,6 +7,8 @@ Built for [TrackMaven Monthly Challenge meetup](http://www.meetup.com/TrackMaven
 
 I also made [a short presentation](http://slides.com/atbaker/trackmaven-monthly-challenge-demo) about the project. See [this YouTube video](https://www.youtube.com/watch?v=UJR1BYjtI7c&feature=youtu.be&t=1m46s) for an idea of the kind of game these questions are meant to support.
 
+wikipedia-question-generator is open source under the [MIT License](LICENSE).
+
 Sample usage
 ------------
 
