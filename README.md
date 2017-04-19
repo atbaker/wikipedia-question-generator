@@ -1,6 +1,8 @@
 wikipedia-question-generator
 ============================
 
+**This project is no longer maintained. It is MIT licensed, so you're welcome to take the code and use it yourself.**
+
 Uses Natural Language Processing and Wikipedia content to try to generate Mad Libs-style game questions. Powers the web app at http://wikitrivia.atbaker.me.
 
 Built for [TrackMaven Monthly Challenge meetup](http://www.meetup.com/TrackMaven-Monthly-Challenge/events/218683569/) in December 2014.
